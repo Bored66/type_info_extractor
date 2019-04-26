@@ -1,5 +1,4 @@
-#ifndef TYPE_CYPHER_H
-#define TYPE_CYPHER_H
+#pragma once
 
 struct cypher_base
 {
@@ -128,5 +127,3 @@ std::size_t encode_type() noexcept
     using type_typeid = typename type_result::type_typeid;
     return encode_type<Type,type_typeid>();
 }
-
-#endif // TYPE_CYPHER_H
