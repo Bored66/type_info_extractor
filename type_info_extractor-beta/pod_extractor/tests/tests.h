@@ -1,5 +1,4 @@
-#ifndef TESTS_H
-#define TESTS_H
+#pragma once
 
 #include <iostream>
 #include <typeinfo>
@@ -113,6 +112,4 @@ void print_member_offset(void *st, void *member);
         sizeof(MEMBER),alignof(MEMBER),\
         padding);\
     offset += (sizeof(MEMBER));printf("offset + size: %d ", offset);
-
-#endif // TESTS_H
 
