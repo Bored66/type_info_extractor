@@ -1,0 +1,39 @@
+BACKGROUND
+==========
+Type Info extractor was developed based on ideas from Anton Polukhin's
+flat_magic template library presentation at CppCon 2016.
+Originally I only wished to make it work using C++11 since my projects
+were mostly using some old compilers for some different reasons.
+Some of them very compelling, like for example, most target platforms had to use
+certified but out-dated OS.
+I ended up writing it totally from scratch striving for better readability
+and some performance gains, but still I must give Anton huge credit for his
+insightful and exciting ideas.
+The original goal developing solution for C++11 was only partially achieved and
+no longer being in pursuit. However, it still possible to use it for run-time POD
+introspection and modification. Compiling it using C++14 allows all that at compile time.
+
+WHAT IT DOES
+============
+It demonstrates ability extract some meta information and manipulate POD structures
+to some extent using templates and constexpr in modern C++, which should allow do many
+trivial things like serialization/deserialization, printing, comparing and testing
+much easier or even automatic.
+
+HOW TO BUILD test executable Linux/CygWin/Windows 10 (Ubuntu subsystem).
+========================================================================
+The project originally was developed using QtCreator, so I kept the file
+[type_info_extractor.pro] just in case. However, it could be much easier
+to build it (it will be g++/C++14 by default) from command line using make.
+Just type:
+$ cd type_info_extractor-beta
+$ make
+
+Or in case you want to use clang as your compiler instead do the following:
+$ make CXX=clang
+
+And after successfully building just run it from command line:
+$ ./type_info_extractor
+
+MS VC++ currently is not supported.
+
