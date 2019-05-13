@@ -49,13 +49,9 @@ tests.h, tests.cpp - different kind of tests
 
 mimic_type.h - get a POD's type info and build (mimic) type from it
 
-build_type.h - build a type using flat type list (with some special types marking
+build_type.h - build a type using flat type list (with some special types marking inner POD types boundaries)
 
-inner POD types boundaries)
-
-extract_type_info.h - get type POD info in a flat list (with some special types marking
-
-inner POD types boundaries)
+extract_type_info.h - get type POD info in a flat list (with some special types marking inner POD types boundaries)
 
 field_count.h - to start probing into POD you need to get field count first
 
