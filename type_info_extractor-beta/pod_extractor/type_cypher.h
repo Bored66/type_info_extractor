@@ -1,5 +1,9 @@
 #pragma once
 
+#include <type_traits>
+#include "mp.h"
+#include "mp_utils.h"
+
 struct cypher_base
 {
     enum

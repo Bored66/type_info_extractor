@@ -40,6 +40,7 @@ message("qmake CONFIG+=c++11 -spec linux-g++ DEFINES+=__code_model_32__")
 CURR_BUILD = "$$QMAKE_CXX $$DEFINES"
 write_file("current_build.txt", CURR_BUILD)
 touch("pod_extractor/tests/tests.h", "current_build.txt")
+touch("pod_extractor/main.cpp", "current_build.txt")
 #DEFINES += TEST_HOW
 #DEFINES += PESSIMISTIC
 DEFINES += USE_CPP_11_WAY

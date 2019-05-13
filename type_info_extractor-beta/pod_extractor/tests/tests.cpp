@@ -71,7 +71,6 @@ void type_decode_test()
             test_type3, test_type4, test_type5>();
 
 }
-
 void type_naming_probe()
 {
     using t1 = long long const*; using t2 = long volatile const*;

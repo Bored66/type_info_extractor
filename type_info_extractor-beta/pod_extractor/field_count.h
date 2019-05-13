@@ -1,4 +1,11 @@
 #pragma once
+
+#include <type_traits>
+
+#include "mp.h"
+
+#include "mp_utils.h"
+
 #if 1 //|| __has_feature(cxx_access_control_sfinae)
 #define FIELD_COUNT_WORKS
 #elif 0

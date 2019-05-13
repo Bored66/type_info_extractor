@@ -17,10 +17,12 @@
 * https://stackoverflow.com/questions/17424477/implementation-c14-make-integer-sequence/
 */
 namespace std {
-#if __code_model_32__
+#if defined(__code_model_32__) || defined (FORCE_32)
 using size_t = unsigned int;
+#elif defined(WIN64)
+using size_t = unsigned long long int;
 #else
-using size_t = unsigned long;
+using size_t = unsigned long int;
 #endif
 template< class T, T... Ints >
 struct integer_sequence

@@ -40,8 +40,10 @@ void test_value_holder_cpp14()
 
 void print_member_offset(void *st, void *member)
 {
-#if defined(__code_model_32__)
+#if defined(__code_model_32__) || defined (FORCE_32)
     printf("fact offset: %d ",
+#elif defined(WIN64)
+    printf("fact offset: %lld ",
 #else
     printf("fact offset: %ld ",
 #endif

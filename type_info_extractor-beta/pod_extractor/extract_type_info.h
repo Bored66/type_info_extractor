@@ -1,3 +1,7 @@
+#include <type_traits>
+
+#include "typeid_array.h"
+
 #pragma once
 
 template<typename T>

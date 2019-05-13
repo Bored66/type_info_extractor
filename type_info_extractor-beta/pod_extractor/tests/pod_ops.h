@@ -82,7 +82,8 @@ constexpr std::size_t get_type_total_count() noexcept
     return get_flat_count(info);
 }
 template<std::size_t N, typename T>
-decltype(auto) get_nth_type_from()
+//decltype(auto) was needed for C++11?
+auto get_nth_type_from()
 {
     constexpr auto info = get_pod_meta_infos<T>();
     constexpr auto flatIndex = get_flat_type_index<N, T>();

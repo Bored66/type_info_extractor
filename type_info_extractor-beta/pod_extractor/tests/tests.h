@@ -12,6 +12,7 @@
 #include "../mimic_type.h"
 #endif
 #include "total_count_obsolete.h"
+#include "pod_ops.h"
 
 #include "../flip_bytes_bits.h"
 #include "../seq_tuple.h"
@@ -38,6 +39,9 @@ constexpr
     size_t szs1[] = { get_type_total_count<PODs>()... };
     printf("Field count TEST:\n");
     const char*type_names[] = { typeid(PODs).name()... };
+#ifdef __clang_major__
+#warning __clang_major__
+#endif
 #if defined(__clang__) && defined(CPP_14)
     for (size_t i = 0; i < sizeof...(PODs); i++)
         printf("name: %s - upper:%ld full:%ld \n",
@@ -66,7 +70,7 @@ void test_type_cyphers()
     puts("");
     for (size_t i = 0; i < sizeof...(Ts); i++)
     {
-#if __code_model_32__
+#if defined(__code_model_32__) || defined (FORCE_32)
         printf("0x%.8X flipped:0x%.8X %.12d %s\n",
 #else
        printf("0x%.8lX flipped:0x%.8lX %.12ld %s\n",

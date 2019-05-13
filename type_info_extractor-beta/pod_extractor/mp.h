@@ -2,6 +2,9 @@
 
 #include <type_traits>
 #include <string>
+
+#include "pod_inspector.h"
+
 template<std::size_t I>
 using size_t_i_c = std::integral_constant<std::size_t, I>;
 
