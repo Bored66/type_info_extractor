@@ -3,6 +3,7 @@
 #include "test_types.h"
 #ifdef CPP_14
 #include "../mimic_type.h"
+#include "../seq_tuple.h"
 #include "pod_ops.h"
 #endif
 
@@ -29,12 +30,16 @@ void test_value_holder_cpp14()
     printf("%g=%g:%g=%g\n", 1.1, uds1.st.f, 2.3, uds1.st.i);
     const//expr
     auto cnt121 = get_type_total_count<user_def_struct>();(void)cnt121;
-    /*user_def_struct0 UDS0{1.2, 2.3};
-    auto f = getNth<4>(mimic_uds);
-    printf("%g", f);
-    std::cout << "++++" <<
-                 dump_tuple_to_string<0,decltype(mimic_uds)>(mimic_uds);
-    */
+    user_def_struct0 UDS0{1.2, 2.3};
+    auto f = getNth<0>(mimic_uds);
+    printf("getNth<4> %g", f);
+    std::cout << getNth<1>(mimic_uds) << " " << getNth<2>(mimic_uds)
+               << " " << getNth<3>(mimic_uds)
+               //<< " " << getNth<4>(mimic_uds)
+               << std::endl;
+    //std::cout << "++++" <<
+      //           dump_tuple_to_string<0,decltype(mimic_uds)>(mimic_uds);
+
 #endif
 }
 

@@ -3,6 +3,8 @@
     (__clang_major__ > 2 && __clang_minor__ > 3) || (__clang_major__ > 3) ||\
     (_MSC_VER > 1912)
 void run_all_tests();
+void pod_ops_demo();
+
 #else
 #define __GCC4_7_GOD_FORBID
 #warning Your C++ compiler is not fully c++11 complaint it thinks
@@ -15,6 +17,7 @@ int main(int, char**)
 #warning Nothing can be done using it
 #else
     run_all_tests();
+    pod_ops_demo();
 #endif
     cpp_ver_out();
 }

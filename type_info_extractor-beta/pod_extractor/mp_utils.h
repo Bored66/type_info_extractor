@@ -13,7 +13,7 @@
 #include <type_traits>
 #else
 /*
-* Borrowed from here:
+* Borrowed mostly from here:
 * https://stackoverflow.com/questions/17424477/implementation-c14-make-integer-sequence/
 */
 namespace std {

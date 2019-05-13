@@ -16,19 +16,6 @@
 
 #include "../flip_bytes_bits.h"
 #include "../seq_tuple.h"
-template<typename TypePOD>
-void test_type(TypePOD & pod)
-{
-#if defined(CPP_11)  || defined(__clang__)
-    (void)pod;
-#elif defined(_MSC_VER)
-#else
-    auto mimic = mimic_type<TypePOD>();
-    memcpy(&mimic, &pod, sizeof(pod));
-//#if CPP_14
-//    std::string str = dump_tuple_to_string(mimic); qDebug() << str.c_str();
-#endif
-}
 template<class...PODs>
 void test_count()
 {
@@ -91,17 +78,19 @@ void test_type_cyphers_type(bool print_results=true)
     if (print_results)
     {
         printf("Type decode/encode test match>>>\n");
-        for (size_t i = 0; i < sizeof...(Ts); i++)
-            printf("%s:%d %d ",
-                   type_names[i], cnvts[i], strcmp(type_names[i], type_names2[i])==0);
-        puts("");
+        for (size_t i = 1; i < sizeof...(Ts); i++)
+            printf("%s: encode: %s type names: %s\n",
+               type_names[i],
+               cnvts[i]? "match":"no match",
+               strcmp(type_names[i], type_names2[i])==0? "match":"no match");
+        puts("End of encode/decode test>>");
     }
 }
 void run_all_tests();
 void field_count_test();
 void type_decode_test();
 void type_naming_probe();
-void test_pod_ops();
+void pod_ops_demo();
 void test_offsets();
 void test_value_holder_cpp14();
 void field_count_test();
@@ -117,3 +106,16 @@ void print_member_offset(void *st, void *member);
         padding);\
     offset += (sizeof(MEMBER));printf("offset + size: %d ", offset);
 
+template<typename TypePOD>
+void test_type(TypePOD & pod)
+{
+#if defined(CPP_11)  || defined(__clang__)
+    (void)pod;
+#elif defined(_MSC_VER)
+#else
+    auto mimic = mimic_type<TypePOD>();
+    memcpy(&mimic, &pod, sizeof(pod));
+//#if CPP_14
+//    std::string str = dump_tuple_to_string(mimic); qDebug() << str.c_str();
+#endif
+}

@@ -41,6 +41,7 @@ CURR_BUILD = "$$QMAKE_CXX $$DEFINES"
 write_file("current_build.txt", CURR_BUILD)
 touch("pod_extractor/tests/tests.h", "current_build.txt")
 touch("pod_extractor/main.cpp", "current_build.txt")
+touch("pod_extractor/pod_ops.cpp", "current_build.txt")
 #DEFINES += TEST_HOW
 #DEFINES += PESSIMISTIC
 DEFINES += USE_CPP_11_WAY
@@ -66,4 +67,5 @@ HEADERS += \
 SOURCES += \
     pod_extractor/main.cpp \
     pod_extractor/tests/tests.cpp \
-    pod_extractor/tests/experimental.cpp
+    pod_extractor/tests/experimental.cpp \
+    pod_extractor/tests/pod_ops.cpp

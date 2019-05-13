@@ -24,12 +24,6 @@ using type_declared_t = typename std::add_pointer<
 template <class T,std::size_t... I>
 constexpr auto fld_count_within_range(std::index_sequence<I...>) noexcept
 ->  type_declared_t< T, I... >;//we don't need any more: { return nullptr;}
-/* We used to be using that monster before
- *         sizeof(decltype(fld_count_within_range<T>
-                        (std::make_index_sequence<upperBound>())))!=0,
-                            std::size_t
-                            >::type//enable_if<
-                            */
 template <class T,std::size_t UpperBound>
     using decltype_t =
         decltype(fld_count_within_range<T>
@@ -65,10 +59,11 @@ private:
     }
     static constexpr
     std::size_t EST_MAX_COUNT()
-#ifndef PESSIMISTIC
-    { return (sizeof(T) / 16) + 1; } //works faster
-#else    //FIXME: Original REMOVE IT! We multiply by 8 because we may have bitfields in T
+#ifdef PESSIMISTIC
+    //FIXME:  REMOVE IT! Original comment: We multiply by 8 because we may have bitfields in T
     { return (sizeof(T) * 8) / 2 + 1; }
+#else
+    { return (sizeof(T) / 16) + 1; } //works faster
 #endif
 public:
     static constexpr

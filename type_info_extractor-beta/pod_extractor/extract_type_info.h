@@ -1,22 +1,22 @@
+#pragma once
 #include <type_traits>
 
 #include "typeid_array.h"
-
-#pragma once
+#include "type_cypher.h"
 
 template<typename T>
 struct is_pod_struct :
     public std::integral_constant<bool,
-    //    (std::is_pod<T>::value || std::is_same<T, std::string>::value ) &&
-    //    (std::is_class<T>::value || std::is_same<T, std::string>::value) &&
     std::is_pod<T>::value &&
     std::is_class<T>::value &&
     !std::is_enum<T>::value &&
     !std::is_empty<T>::value>
 {};
+//    (std::is_pod<T>::value || std::is_same<T, std::string>::value ) &&
+//    (std::is_class<T>::value || std::is_same<T, std::string>::value) &&
 template <class T>
 constexpr T construct_helper() noexcept
-// adding const here allows to deal with copyable only types
+//Original comment: adding const here allows to deal with copyable only types
 {
     return{};
 }

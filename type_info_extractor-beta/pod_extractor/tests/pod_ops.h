@@ -147,11 +147,13 @@ void dump_struct(PodT const & pod, std::index_sequence<I...>)
 template<class PodT, size_t N=get_type_total_count<PodT>()>
 void dump_struct(PodT const & pod)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     dump_struct(pod, std::make_index_sequence<N>());
 }
 template<size_t N1, size_t N2, class PodT>
 void test_pod_ops_2(PodT & pod)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
     std::cout << "v1: ";
     print_pod_nth_field<N1>(pod);
     auto & v1 = get_nth_lvalue_ref_from<N1>(pod);

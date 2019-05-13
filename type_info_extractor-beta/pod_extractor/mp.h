@@ -116,4 +116,3 @@ namespace meta_prog
         typename meta_prog::mp_list_index_of<T,
             list_of_fundamental_types>::type;
 }
-#include "type_cypher.h"
