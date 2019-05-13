@@ -29,11 +29,11 @@ Just type:
 
 $ cd type_info_extractor-beta
 
-$ make
+$ make -f Makefile.in
 
 Or in case you want to use clang as your compiler instead do the following:
 
-$ make CXX=clang
+$ make CXX=clang -f Makefile.in
 
 And after successfully building just run it from command line:
 
@@ -72,4 +72,4 @@ test_types.h - POD types for testing
 
 seq_tuple.h - experimental stuff
 experimental.cpp - experimental stuff
-
+Makefile.in, Makefile.CPP11 - make files 
