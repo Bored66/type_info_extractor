@@ -37,3 +37,22 @@ $ ./type_info_extractor
 
 MS VC++ currently is not supported.
 
+Project files description:
+--------------------------
+pod_ops.h, pod_ops.cpp - POD manipulation demo
+tests.h, tests.cpp - different kind of tests
+mimic_type.h - get a POD's type info and build (mimic) type from it
+build_type.h - build a type using flat type list (with some special types marking
+inner POD types boundaries)
+extract_type_info.h - get type POD info in a flat list (with some special types marking
+inner POD types boundaries)
+field_count.h - to start probing into POD you need to get field count first
+typeid_array.h - storage for type info
+type_cypher.h - type encoding/decoding faccility
+mp.h - basic type list and some manipulations
+mp_utils.h - old compilers lacking some essential utility stuff
+which can be found in "utility" header file for more up-to-date ones
+test_types.h - POD types for testing
+seq_tuple.h - experimental stuff
+experimental.cpp - experimental stuff
+
