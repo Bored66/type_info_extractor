@@ -26,18 +26,22 @@ The project originally was developed using QtCreator, so I kept the file
 [type_info_extractor.pro] just in case. However, it could be much easier
 to build it (it will be g++/C++14 by default) from command line using make.
 Just type:
+
 $ cd type_info_extractor-beta
+
 $ make
 
 Or in case you want to use clang as your compiler instead do the following:
+
 $ make CXX=clang
 
 And after successfully building just run it from command line:
+
 $ ./type_info_extractor
 
 MS VC++ currently is not supported.
 
-Project files description:
+Project files:
 --------------------------
 pod_ops.h, pod_ops.cpp - POD manipulation demo
 
