@@ -1,7 +1,9 @@
 BACKGROUND
 ==========
 Type Info extractor was developed based on ideas from Anton Polukhin's
-flat_magic template library presentation at CppCon 2016.
+magic_get template (https://github.com/apolukhin/magic_get) library presentation at CppCon 2016:
+C++14 Reflections Without Macros, Markup nor External Tooling: Metaprogramming Tricks for POD Types
+(https://www.youtube.com/watch?v=abdeAew3gmQ)
 Originally I only wished to make it work using C++11 since my projects
 were mostly using some old compilers for some different reasons.
 Some of them very compelling, like for example, most target platforms had to use
