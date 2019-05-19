@@ -7,8 +7,8 @@ C++14 Reflections Without Macros, Markup nor External Tooling: Metaprogramming T
 Originally I only wished to make it work using C++11 since my projects
 were mostly using some old compilers for some different reasons.
 Some of them very compelling, like for example, most target platforms had to use
-certified but out-dated OS.
-I ended up writing it totally from scratch striving for better readability
+certified but rather out-dated OS.
+I ended up writing it almost totally from scratch striving for better readability
 and some performance gains, but still I must give Anton huge credit for his
 insightful and exciting ideas.
 The original goal developing solution for C++11 was only partially achieved and
@@ -17,7 +17,7 @@ introspection and modification. Compiling it using C++14 allows all that at comp
 
 WHAT IT DOES
 ============
-It demonstrates ability extract some meta information and manipulate POD structures
+It demonstrates ability extract some meta information and manipulate POD (Plain Old Data) structures
 to some extent using templates and constexpr in modern C++, which should allow do many
 trivial things like serialization/deserialization, printing, comparing and testing
 much easier or even automatic.
