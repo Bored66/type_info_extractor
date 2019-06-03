@@ -1,5 +1,4 @@
-#ifndef INDEX_SEQ_H
-#define INDEX_SEQ_H
+#pragma once
 
 #if (__clang_major__ > 2 && __clang_minor__ > 3 && !defined(CPP_11)) || \
     __cplusplus >= 201404  || defined(CPP_14)
@@ -88,4 +87,3 @@ using add_pointer_t = typename add_pointer<T>::type;
 }
 #endif
 
-#endif // INDEX_SEQ_H

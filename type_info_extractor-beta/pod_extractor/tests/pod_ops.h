@@ -133,21 +133,23 @@ void print_pod_nth_field(PodT const & pod, bool debug=false)
     static_assert(N < max, "field index out of range");
     std::cout << "#" << N << ":=" << get_nth_value_from<N>(pod);
     if (debug)
-    std::cout << "::"
-                << get_flat_type_index<N, PodT>() << ":"
-              << typeid(decltype(get_nth_value_from<N>(pod))).name();
-    std::cout << std::endl;
+    {
+        std::cout << "::"
+                    << get_flat_type_index<N, PodT>() << ":"
+                  << typeid(decltype(get_nth_value_from<N>(pod))).name();
+        std::cout << std::endl;
+    }
 }
 template<class PodT, size_t ... I>
 void dump_struct(PodT const & pod, std::index_sequence<I...>)
 {
-    int results[]{ (print_pod_nth_field<I>(pod, true), 0)... };
+    int results[]{ (print_pod_nth_field<I>(pod, false), 0)... };
     (void)results;
 }
 template<class PodT, size_t N=get_type_total_count<PodT>()>
 void dump_struct(PodT const & pod)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    //std::cout << __PRETTY_FUNCTION__ << std::endl;
     dump_struct(pod, std::make_index_sequence<N>());
 }
 template<size_t N1, size_t N2, class PodT>
