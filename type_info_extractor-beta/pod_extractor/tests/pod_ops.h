@@ -175,6 +175,7 @@ void test_pod_ops_2(PodT & pod)
 
 #else
 #include "total_count_obsolete.h"
+
 #endif
 template<typename T>
 constexpr T get_value_from_ptr(void *ptr)

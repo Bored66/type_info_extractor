@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef CPP_14
+#if defined(CPP_14) || defined(TRY_CPP_14_TESTS)
 #include "pod_inspector.h"
 #include "build_type.h"
 
@@ -23,6 +23,6 @@ constexpr auto mimic_type()
     return mimic_type<Type,Count>(std::make_index_sequence<info.index>{});
 }
 #else
-#warning works strictly only using c++14
+#warning mimic_type works strictly only using c++14
 #endif // CPP_14
 

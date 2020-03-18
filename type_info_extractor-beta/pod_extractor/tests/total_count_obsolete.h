@@ -81,4 +81,41 @@ noexcept
                  get_type_total_count<Type>() : 1),
             construct_helper<Type>();
 }
+#else
+template<std::size_t N, typename T>
+constexpr std::size_t get_flat_type_index()
+{
+    constexpr auto info = get_pod_meta_infos<T>();
+    size_t counter = 0;
+    size_t realTypeIndex = 0;
+    for (;realTypeIndex < info.index && info.index > N;realTypeIndex++)
+    {
+        if (counter == N &&
+                (info.type_ids[realTypeIndex] != meta_prog::mp_type_open_brace_value &&
+                 info.type_ids[realTypeIndex] != meta_prog::mp_type_close_brace_value))
+            return realTypeIndex;
+        if (info.type_ids[realTypeIndex] != meta_prog::mp_type_open_brace_value &&
+              info.type_ids[realTypeIndex] != meta_prog::mp_type_close_brace_value)
+            counter++;
+    }
+    return counter;
+}
+template<typename FromArray>
+constexpr std::size_t get_flat_count(const FromArray & info)
+{
+    size_t counter = 0;
+    for (size_t i = 0; i < info.index; i++)
+    {
+        if (info.type_ids[i] != meta_prog::mp_type_open_brace_value &&
+              info.type_ids[i] != meta_prog::mp_type_close_brace_value)
+            counter++;
+    }
+    return counter;
+}
+template<typename T>
+constexpr std::size_t get_type_total_count() noexcept
+{
+    return get_flat_count(get_pod_meta_infos<T>());
+}
+
 #endif
