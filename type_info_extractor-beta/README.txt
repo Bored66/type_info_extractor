@@ -71,5 +71,8 @@ which can be found in "utility" header file for more up-to-date ones
 test_types.h - POD types for testing
 
 seq_tuple.h - experimental stuff
+
 experimental.cpp - experimental stuff
-Makefile.in, Makefile.CPP11 - make files 
+
+Makefile.in, Makefile.CPP11 - make files for default (c++14) and c++11 respectivly
+
