@@ -1,8 +1,16 @@
 #pragma once
 
+#if defined(CPP_11) 
+    #warning You are in defined(CPP_11)  MODE
+#endif
+#if defined(TRY_CPP_14_TESTS)
+    #warning You are in  defined(TRY_CPP_14_TESTS) MODE
+#endif
+
 #ifdef CPP_11
 #include "../mp_utils.h"
 #include "../typeid_array.h"
+
 
 template<typename Iterator, typename T>
 constexpr  T

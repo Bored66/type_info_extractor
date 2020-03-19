@@ -9,7 +9,7 @@ void pod_ops_demo()
     user_def_struct1 uds1 {nullptr,1,2,'3',{4.4f,5.5},'6',7};
     simple_enclosure se{11,uds1,0xffff,1.2f,2.3f};
     simple_enclosure2 se2{11,uds1,1,{1.2f,2.3},1};
-#if defined(CPP_11) && !defined(TRY_CPP_14_TESTS)
+#if defined(CPP_11) //&& !defined(TRY_CPP_14_TESTS)
     auto counter_se = get_type_total_count<decltype(se)>();(void)counter_se;
     auto counter_se2 = get_type_total_count<decltype(se2)>();(void)counter_se2;
     for (int i = 0; i < 100; i++)

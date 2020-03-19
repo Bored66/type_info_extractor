@@ -1,6 +1,7 @@
 #include <cstring>
 #include "test_types.h"
 #include "../pod_inspector.h"
+#include "../mimic_type.h"
 #include "../seq_tuple.h"
 #include "tests.h"
 
@@ -9,6 +10,9 @@ void run_all_tests()
     field_count_test();
     type_decode_test();
     //user_def_struct1 uds1{ nullptr,1,2,3,{ 4, 5 },6,7};
+    #if defined(CPP_11) && defined(TRY_CPP_14_TESTS)
+    auto mimic = mimic_type<user_def_struct1>();
+    #endif
     //test_type(uds1);
     //test_value_holder_cpp14();
 }

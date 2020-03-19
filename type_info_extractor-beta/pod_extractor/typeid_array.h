@@ -42,11 +42,15 @@ struct typeid_array
             type_meta_info[index] = info,
 #else
 #endif
-#ifdef CPP_11
+#if defined(CPP_11) || defined(TRY_CPP_14_TESTS)
+    #warning You are in defined(CPP_11) or defined(TRY_CPP_14_TESTS) MODE
+#else
+#endif
+#if defined(CPP_11) || defined(TRY_CPP_14_TESTS)            
             const_cast<typeid_array*>(this)->
 #endif
             type_ids[index] = info.type_index,
-#ifdef CPP_11
+#if defined(CPP_11) || defined(TRY_CPP_14_TESTS)
             const_cast<typeid_array*>(this)->
 #endif
             index = index + 1;

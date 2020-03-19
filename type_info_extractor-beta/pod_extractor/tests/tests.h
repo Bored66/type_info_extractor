@@ -109,7 +109,7 @@ void print_member_offset(void *st, void *member);
 template<typename TypePOD>
 void test_type(TypePOD & pod)
 {
-#if defined(CPP_11)  || defined(__clang__)
+#if (defined(CPP_11)  || defined(__clang__)) && !defined(TRY_CPP_14_TESTS)
     (void)pod;
 #elif defined(_MSC_VER)
 #else
