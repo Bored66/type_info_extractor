@@ -42,7 +42,13 @@ struct typeid_array
             type_meta_info[index] = info,
 #else
 #endif
+#ifdef CPP_11
+            const_cast<typeid_array*>(this)->
+#endif
             type_ids[index] = info.type_index,
+#ifdef CPP_11
+            const_cast<typeid_array*>(this)->
+#endif
             index = index + 1;
 	}
     constexpr std::size_t addInfo(const std::size_t type_id) const
