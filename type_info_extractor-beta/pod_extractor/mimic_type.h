@@ -30,7 +30,7 @@ constexpr auto form_type() -> decltype (RetT{})
 }
 
 template<typename Type, size_t Count = fields_count<Type>(), size_t... I>
-constexpr auto mimic_type()
+constexpr auto mimic_type(std::index_sequence<I...>)
     -> decltype (form_type<
                      typename get_type<
                            get_pod_meta_infos<Type, Count,true>().type_ids[I]
