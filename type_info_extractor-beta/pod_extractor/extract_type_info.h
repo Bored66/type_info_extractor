@@ -31,11 +31,7 @@ struct extract_type_info
         return
             (is_pod_struct<Type>::value?
                 when_not_found<Type>() :
-#ifdef USE_CPP_11_WAY
-                 addInfo(encode_type<Type>(), sizeof(Type), alignof(Type))
-#else
                 meta_info_ref.addInfo({ Nth, encode_type<Type>(), sizeof(Type), 1, 0 })
-#endif
                 ),
             construct_helper<Type>();
     }
@@ -53,19 +49,9 @@ struct extract_type_info
     ) const noexcept
     {
         return //meta_info_ref.index = type_id;
-#if defined(CPP_11)// || defined(TRY_CPP_14_TESTS)
-            const_cast<extract_type_info*>(this)->
-                meta_info_ref.type_sizes[meta_info_ref.index] = size,
-            const_cast<extract_type_info*>(this)->
-                meta_info_ref.type_aligns[meta_info_ref.index] = align_of,
-            const_cast<extract_type_info*>(this)->
-               meta_info_ref.type_ids[meta_info_ref.index] = type_id,
-            const_cast<extract_type_info*>(this)->meta_info_ref.index = meta_info_ref.index + 1;
-#else
                 meta_info_ref.type_sizes[meta_info_ref.index] = size,
                 meta_info_ref.type_aligns[meta_info_ref.index] = align_of,
            meta_info_ref.type_ids[meta_info_ref.index++] = type_id;
-#endif
     }
 };
 template<typename Type, typename TypeidArray,
@@ -98,23 +84,15 @@ CPP_11_NO_CONST_WARN_OFF noexcept
     using typeid_array_n =
         typename std::remove_reference<decltype(meta_info_ref)>::type;
     return (InsertBraces?
-     #ifdef USE_CPP_11_WAY
-         addInfo(meta_prog::mp_type_open_brace_value, sizeof(Type), alignof(Type))
-     #else
         meta_info_ref.addInfo(meta_info{ Nth, meta_prog::mp_type_open_brace_value,
             sizeof(Type), fields_count<Type>(), FieldCount })
-     #endif
        : 0),
     get_full_type_info
         <Type, typeid_array_n, FieldCount, InsertBraces >
         (std::make_index_sequence<fields_count<Type>()>{}, meta_info_ref),
             (InsertBraces)?
-            #ifdef USE_CPP_11_WAY
-                addInfo(meta_prog::mp_type_close_brace_value, sizeof(Type), alignof(Type))
-            #else
                 meta_info_ref.addInfo({ Nth, meta_prog::mp_type_close_brace_value,
                 sizeof(Type), fields_count<Type>(),FieldCount })
-            #endif
               :0;
 }
 template<class T, std::size_t Fields = fields_count<T>(), bool InsertBraces = true>

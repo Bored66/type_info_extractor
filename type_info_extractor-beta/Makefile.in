@@ -7,7 +7,7 @@
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DCPP_14 -DIGNORE_DIAG -DUSE_CPP_11_WAY
+DEFINES       = -DCPP_14 -DIGNORE_DIAG
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -std=c++1y -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../type_info_extractor-beta -I.
@@ -62,7 +62,6 @@ main.o: pod_extractor/main.cpp pod_extractor/tests/test_types.h \
 		pod_extractor/extract_type_info.h \
 		pod_extractor/tests/tests.h \
 		pod_extractor/mimic_type.h \
-		pod_extractor/tests/total_count_obsolete.h \
 		pod_extractor/flip_bytes_bits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o pod_extractor/main.cpp
 
@@ -79,7 +78,6 @@ tests.o: pod_extractor/tests/tests.cpp pod_extractor/tests/test_types.h \
 		pod_extractor/tests/tests.h \
                 pod_extractor/tests/pod_ops.h \
                 pod_extractor/mimic_type.h \
-		pod_extractor/tests/total_count_obsolete.h \
 		pod_extractor/flip_bytes_bits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tests.o pod_extractor/tests/tests.cpp
 
@@ -96,6 +94,5 @@ pod_ops.o: pod_extractor/tests/tests.cpp pod_extractor/tests/test_types.h \
                 pod_extractor/tests/tests.h \
                 pod_extractor/tests/pod_ops.h \
                 pod_extractor/mimic_type.h \
-                pod_extractor/tests/total_count_obsolete.h \
                 pod_extractor/flip_bytes_bits.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pod_ops.o pod_extractor/tests/pod_ops.cpp

@@ -24,10 +24,8 @@ template<std::size_t N, bool InsertBraces = false>
 struct typeid_array
 {
     std::size_t type_ids[N]{};
-#ifdef USE_CPP_11_WAY
     std::size_t type_aligns[N]{};
     std::size_t type_sizes[N]{};
-#endif
     meta_info type_meta_info[N]{};
 
     std::size_t index = 0;
