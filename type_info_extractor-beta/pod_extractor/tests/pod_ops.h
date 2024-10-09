@@ -143,7 +143,7 @@ void print_pod_nth_field(PodT const & pod, bool debug=false)
 template<class PodT, size_t ... I>
 void dump_struct(PodT const & pod, std::index_sequence<I...>)
 {
-    int results[]{ (print_pod_nth_field<I>(pod, false), 0)... };
+    int results[]{ (print_pod_nth_field<I>(pod, true), 0)... };
     (void)results;
 }
 template<class PodT, size_t N=get_type_total_count<PodT>()>
