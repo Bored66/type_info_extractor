@@ -1,9 +1,13 @@
-Field count>>> 16user_def_struct0 - upper: 2 full: 2 16user_def_struct1 - upper: 7 full: 8 15user_def_struct - upper: 10 full: 25 2ms - upper: 13 full: 37 12almost_empty - upper: 4 full: 47 12TYPE_KOEFF_4 - upper: 4 full: 4 16TYPE_TEMPERATURE - upper: 7 full: 10 11STATUS_BITS - upper: 16 full: 16 12compose_rppt - upper: 2 full: 26 
-Type decode/encode test match>>> Ps:1 1 PKs:1 1 PVKPKs:1 1 PVPVKPKs:1 1 PKPVPVKPKs:1 1 PVKPVKPKPKPVPVKPKs:1 1 
-static const char* seq_tuple<Values>::name() [with Values = {const volatile char* const volatile* const volatile*, short int, int, char, seq_tuple<float, double>, char, short int}]
-static const char* seq_tuple<Values>::name() [with Values = {int, int, int}]
-0=0:1=1:2=2
-1.1=1.1:2.3=2.3
+Field count>>> 
+16user_def_struct0 - upper: 2 full: 2
+16user_def_struct1 - upper: 7 full: 8
+15user_def_struct - upper: 10 full: 25
+2ms - upper: 13 full: 37
+12almost_empty - upper: 4 full: 47
+12TYPE_KOEFF_4 - upper: 4 full: 4
+16TYPE_TEMPERATURE - upper: 7 full: 10
+11STATUS_BITS - upper: 16 full: 16
+12compose_rppt - upper: 2 full: 26 
 #0:=0::0:PVKPVKPVKc
 #1:=1::1:s
 #2:=2::2:i
