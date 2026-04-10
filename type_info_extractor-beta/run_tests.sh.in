@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Создаем директорию для результатов
+mkdir -p test_results
+
+# Эталонный файл
+BASELINE=$1
+
+# Список версий для тестирования
+VERSIONS=("cpp14" "cpp17" "cpp20")
+
+# Цвета для вывода
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+for VERSION in "${VERSIONS[@]}"; do
+    echo "========================================="
+    echo "Running type_info_extractor_${VERSION}"
+    echo "========================================="
+    
+    # Запуск и сохранение вывода
+    ./build/type_info_extractor_${VERSION} > "test_results/output_${VERSION}.txt" 2>&1
+    
+    # Сравнение с эталоном
+    if diff -q "test_results/output_${VERSION}.txt" "$BASELINE" > /dev/null; then
+        echo -e "${GREEN}✓ ${VERSION}: Output matches baseline${NC}"
+    else
+        echo -e "${RED}✗ ${VERSION}: Output differs from baseline${NC}"
+        echo "  Diff saved to: test_results/diff_${VERSION}.txt"
+        diff "test_results/output_${VERSION}.txt" "$BASELINE" > "test_results/diff_${VERSION}.txt"
+        cat "test_results/diff_${VERSION}.txt"
+    fi
+    echo ""
+done
+
+# Сводка
+echo "========================================="
+echo "Summary:"
+echo "========================================="
+for VERSION in "${VERSIONS[@]}"; do
+    if diff -q "test_results/output_${VERSION}.txt" "$BASELINE" > /dev/null; then
+        echo -e "${GREEN}✓ ${VERSION}${NC}"
+    else
+        echo -e "${RED}✗ ${VERSION}${NC}"
+    fi
+done

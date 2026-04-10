@@ -7,7 +7,11 @@
 template<typename T>
 struct is_pod_struct :
     public std::integral_constant<bool,
+#if CPP_STANDARD_VALUE >= 17
+    std::is_standard_layout_v<T> && std::is_trivially_constructible_v<T> &&
+#else
     std::is_pod<T>::value &&
+#endif
     std::is_class<T>::value &&
     !std::is_enum<T>::value &&
     !std::is_empty<T>::value>
