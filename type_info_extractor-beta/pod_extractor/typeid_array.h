@@ -37,20 +37,18 @@ struct typeid_array
     constexpr std::size_t addInfo(const meta_info & info)
     CPP_11_NO_CONST_WARN_OFF noexcept
 	{
-        return
-#if defined(__clang__) && !defined(CPP_11)
-            type_meta_info[index] = info,
-#else
+#if defined(__clang__)
+            type_meta_info[index] = info;
 #endif
-#if defined(CPP_11) || defined(TRY_CPP_14_TESTS)
-    #warning You are in defined(CPP_11) or defined(TRY_CPP_14_TESTS) MODE
-#else
+#if defined(TRY_CPP_14_TESTS)
+    #warning You are in defined(TRY_CPP_14_TESTS) MODE
 #endif
-#if defined(CPP_11) || defined(TRY_CPP_14_TESTS)            
+#if defined(TRY_CPP_14_TESTS)            
             const_cast<typeid_array*>(this)->
 #endif
-            type_ids[index] = info.type_index,
-#if defined(CPP_11) || defined(TRY_CPP_14_TESTS)
+            type_ids[index] = info.type_index;
+        return
+#if defined(TRY_CPP_14_TESTS)
             const_cast<typeid_array*>(this)->
 #endif
             index = index + 1;

@@ -104,17 +104,3 @@ void print_member_offset(void *st, void *member);
         sizeof(MEMBER),alignof(MEMBER),\
         padding);\
     offset += (sizeof(MEMBER));printf("offset + size: %d ", offset);
-
-template<typename TypePOD>
-void test_type(TypePOD & pod)
-{
-#if (defined(CPP_11)  || defined(__clang__)) && !defined(TRY_CPP_14_TESTS)
-    (void)pod;
-#elif defined(_MSC_VER)
-#else
-    auto mimic = mimic_type<TypePOD>();
-    memcpy(&mimic, &pod, sizeof(pod));
-//#if CPP_14
-//    std::string str = dump_tuple_to_string(mimic); qDebug() << str.c_str();
-#endif
-}

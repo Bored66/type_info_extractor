@@ -26,8 +26,6 @@ void cpp_ver_out()
     printf(
 #ifdef CPP_14
     "\nC++14, "
-#elif defined(CPP_11)
-    "\nC++11, "
 #elif _MSC_VER
     "\nMS VC++, "
 #endif

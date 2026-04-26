@@ -7,7 +7,7 @@
 template<typename T>
 struct is_pod_struct :
     public std::integral_constant<bool,
-#if CPP_STANDARD_VALUE >= 17
+#if __cplusplus >= 201700
     std::is_standard_layout_v<T> && std::is_trivially_constructible_v<T> &&
 #else
     std::is_pod<T>::value &&
@@ -16,8 +16,6 @@ struct is_pod_struct :
     !std::is_enum<T>::value &&
     !std::is_empty<T>::value>
 {};
-//    (std::is_pod<T>::value || std::is_same<T, std::string>::value ) &&
-//    (std::is_class<T>::value || std::is_same<T, std::string>::value) &&
 template <class T>
 constexpr T construct_helper() noexcept
 //Original comment: adding const here allows to deal with copyable only types
@@ -57,19 +55,9 @@ struct extract_type_info
     ) const noexcept
     {
         return //meta_info_ref.index = type_id;
-#if defined(CPP_11)// || defined(TRY_CPP_14_TESTS)
-            const_cast<extract_type_info*>(this)->
-                meta_info_ref.type_sizes[meta_info_ref.index] = size,
-            const_cast<extract_type_info*>(this)->
-                meta_info_ref.type_aligns[meta_info_ref.index] = align_of,
-            const_cast<extract_type_info*>(this)->
-               meta_info_ref.type_ids[meta_info_ref.index] = type_id,
-            const_cast<extract_type_info*>(this)->meta_info_ref.index = meta_info_ref.index + 1;
-#else
                 meta_info_ref.type_sizes[meta_info_ref.index] = size,
                 meta_info_ref.type_aligns[meta_info_ref.index] = align_of,
            meta_info_ref.type_ids[meta_info_ref.index++] = type_id;
-#endif
     }
 };
 template<typename Type, typename TypeidArray,

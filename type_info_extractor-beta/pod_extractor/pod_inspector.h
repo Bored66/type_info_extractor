@@ -10,7 +10,11 @@
 #endif
 #include <type_traits>
 
-#include "mp_utils.h"
+// #include "mp_utils.h"
+#include <utility>
+#include <type_traits>
+#define USE_UTILITY
+
 #define USE_SEQ_TUPLE
 #ifdef USE_SEQ_TUPLE
 #include "seq_tuple.h"
@@ -31,7 +35,7 @@ template<typename... Ts>
 #else
     using type_list = std::tuple<Ts...>;
 #endif
-#include "mp.h"
+// #include "mp.h"
 #include "typeid_array.h"
 
 #ifdef IGNORE_DIAG
