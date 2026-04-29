@@ -54,7 +54,6 @@ HEADERS += \
    pod_extractor/mp.h \
    pod_extractor/tests/test_types.h \
    pod_extractor/typeid_array.h \
-   pod_extractor/mp_utils.h \
    pod_extractor/extract_type_info.h \
    pod_extractor/tests/tests.h \
    pod_extractor/field_count.h \

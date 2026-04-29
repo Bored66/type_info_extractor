@@ -4,9 +4,8 @@
     __cplusplus >= 201404  || defined(CPP_14)
 #define USE_UTILITY
 #else
-#define USE_UTILITY_NSTD
+#error No longer supported
 #endif
-//#undef USE_UTILITY
 #ifdef USE_UTILITY
 #include <utility>
 #include <type_traits>
