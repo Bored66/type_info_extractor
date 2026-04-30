@@ -3,7 +3,7 @@
 #include "test_types.h"
 #ifdef CPP_14
 #include "mimic_type.h"
-#include "../seq_tuple.h"
+#include "seq_tuple.h"
 #include "pod_ops.h"
 #endif
 

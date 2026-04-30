@@ -1,5 +1,5 @@
 #include "test_types.h"
-#include "../pod_inspector.h"
+#include "pod_inspector.h"
 
 #include "pod_ops.h"
 

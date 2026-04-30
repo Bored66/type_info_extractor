@@ -10,8 +10,8 @@
 
 #include "pod_ops.h"
 
-#include "../flip_bytes_bits.h"
-#include "../seq_tuple.h"
+#include "flip_bytes_bits.h"
+#include "seq_tuple.h"
 template<class...PODs>
 void test_count()
 {
