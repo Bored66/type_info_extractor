@@ -39,7 +39,6 @@ foreach(STD ${CPP_STANDARDS})
     # Определения для конкретного стандарта
     target_compile_definitions(${TARGET_NAME} PRIVATE 
         IGNORE_DIAG
-        USE_CPP_11_WAY
         CPP_14
     )
     

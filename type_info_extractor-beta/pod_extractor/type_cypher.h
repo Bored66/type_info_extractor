@@ -90,11 +90,8 @@ struct get_type<meta_prog::mp_type_close_brace_value>
 {
     using type = meta_prog::mp_type_close_brace;
 };
-//#define DEBUG_NO_CONSTEXPR
 template<typename type_result, typename type_typeid, std::size_t N = 0>
-#ifndef DEBUG_NO_CONSTEXPR
 constexpr
-#endif
 typename std::enable_if<
 (std::is_same<type_typeid, meta_prog::mp_type_not_found>::value == false ||
         (std::is_same<type_typeid, meta_prog::mp_type_not_found>::value &&
@@ -106,9 +103,7 @@ typename std::enable_if<
                              (cypher_base::shift*N));
 }
 template<typename type_result, typename type_typeid, std::size_t N = 0>
-#ifndef DEBUG_NO_CONSTEXPR
 constexpr
-#endif
 typename std::enable_if<
 (std::is_same<type_typeid, meta_prog::mp_type_not_found>::value &&
                                             N<cypher_base::MAX_DEPTH),
@@ -121,9 +116,7 @@ std::size_t>::type encode_type() noexcept
                                             (cypher_base::shift*N));
 }
 template<typename Type>
-#ifndef DEBUG_NO_CONSTEXPR
 constexpr
-#endif
 std::size_t encode_type() noexcept
 {
     using type_result = type_cypher<Type>;
