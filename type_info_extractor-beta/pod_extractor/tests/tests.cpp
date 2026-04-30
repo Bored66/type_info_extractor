@@ -1,7 +1,6 @@
 #include <cstring>
 #include "test_types.h"
-#include "../pod_inspector.h"
-#include "../mimic_type.h"
+#include "pod_inspector.h"
 #include "../seq_tuple.h"
 #include "tests.h"
 

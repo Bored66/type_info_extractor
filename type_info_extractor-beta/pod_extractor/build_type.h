@@ -9,12 +9,15 @@ using NOT_FOUND = meta_prog::mp_type_not_found;
 template <typename>
 struct pop_first;
 
-template <template<class...> class TL, typename T, typename... Tail>
-struct pop_first<TL<T,Tail...>>
+template <typename T, typename... Tail>
+struct pop_first<tuple_type<T,Tail...>>
 {
     using first = T;
     using rest = tuple_type<Tail...>;
 };
+
+template <typename List>
+using pop_first_t = typename pop_first<List>::first;
 
 template <typename Head, typename... OHs>
 struct build_type_impl;
@@ -55,7 +58,7 @@ struct build_type_impl<tuple_type<OHs...>, tuple_type<END_TAG, Ts...>>
 template <typename... OHs>
 struct build_type_impl<tuple_type<OHs...>, tuple_type<>>
 {
-    using first = typename pop_first<tuple_type<OHs...>>::first;
+    using first = pop_first_t<tuple_type<OHs...>>;
     using result = tuple_type< OHs...>;
     using tail = tuple_type<>;
 };
