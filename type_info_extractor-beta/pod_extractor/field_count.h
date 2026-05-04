@@ -1,37 +1,27 @@
 #pragma once
 
 #include <type_traits>
+#include <utility>
 
-#include "mp.h"
-
-#if 1 //|| __has_feature(cxx_access_control_sfinae)
-#define FIELD_COUNT_WORKS
-#elif 0
-#define TEST_HOW
-#define PESSIMISTIC
-#endif
 template<std::size_t N>
 struct accept_any_type
 {
     std::size_t ignore;
     template <class Type> constexpr operator Type&() const noexcept;
 };
-template <class T, std::size_t... I>
-using type_declared_t = typename std::add_pointer<
-    decltype(T{ accept_any_type<I>{ I }... })>::type;
-template <class T,std::size_t... I>
-constexpr auto fld_count_within_range(std::index_sequence<I...>) noexcept
-->  type_declared_t< T, I... >;//we don't need any more: { return nullptr;}
-template <class T,std::size_t UpperBound>
-    using decltype_t =
-        decltype(fld_count_within_range<T>
-            (std::make_index_sequence<UpperBound>()));
-//NOTE: !=0 is very important for clang and lesser versions of g++!
-//typename std::enable_if<sizeof(decltype_t<T, upperBound>)!=0,std::size_t>::type
-template<class T,std::size_t UpperBound>
-    using enable_if_upper_bound_is_ok_t =
-        typename std::enable_if<sizeof(decltype_t<T, UpperBound>)!=0,
-            std::size_t>::type;
+
+template<typename T, std::size_t... I>
+constexpr auto check_impl(std::index_sequence<I...>) 
+    -> decltype(T{ accept_any_type<I>{I}... } );
+
+template<typename T, std::size_t N, typename = void>
+struct can_init_with : std::false_type {};
+
+template<typename T, std::size_t N>
+struct can_init_with<T, N, std::void_t<decltype(check_impl<T>(std::make_index_sequence<N>()))>>
+    : std::true_type {};
+template <std::size_t I>
+using size_t_i_c = std::integral_constant<std::size_t, I>;
 
 template<class T>
 struct count_type_fields
@@ -39,46 +29,37 @@ struct count_type_fields
 private:
     template <std::size_t N>
     static constexpr
-    std::size_t count(size_t_i_c<N>, size_t_i_c<N>, long) noexcept
+    std::size_t count(size_t_i_c<N>, size_t_i_c<N>) noexcept
     { return N; }
     template <std::size_t lowerBound, std::size_t upperBound>
-    static constexpr enable_if_upper_bound_is_ok_t<T, upperBound>
-    count(size_t_i_c<lowerBound>, size_t_i_c<upperBound>, long) noexcept
-    {
-        return count(size_t_i_c<upperBound>{}, size_t_i_c<upperBound +
-                     (upperBound - lowerBound + 1) / 2>{}, 1L);
-    }
-    template <std::size_t lowerBound, std::size_t upperBound>
     static constexpr std::size_t
-    count(size_t_i_c<lowerBound>, size_t_i_c<upperBound>, int) noexcept
+    count(size_t_i_c<lowerBound>, size_t_i_c<upperBound>) noexcept
     {
-        return count(size_t_i_c<lowerBound>{},
-                     size_t_i_c<(lowerBound + upperBound) / 2>{}, 1L);
+        if constexpr(can_init_with<T, upperBound>::value)
+        // if constexpr(sizeof(decltype_t<T, upperBound>) != 0)
+        {
+            return count(size_t_i_c<upperBound>{}, size_t_i_c<upperBound +
+                        (upperBound - lowerBound + 1) / 2>{});
+        }
+        else
+        {
+                return count(size_t_i_c<lowerBound>{},
+                     size_t_i_c<(lowerBound + upperBound) / 2>{});
+        }
     }
-    static constexpr
-    std::size_t EST_MAX_COUNT()
-#ifdef PESSIMISTIC
-    //FIXME:  REMOVE IT! Original comment: We multiply by 8 because we may have bitfields in T
-    { return (sizeof(T) * 8) / 2 + 1; }
-#else
+    static constexpr std::size_t EST_MAX_COUNT()
     { return (sizeof(T) / 16) + 1; } //works faster
-#endif
 public:
-    static constexpr
-    std::size_t count_fields() noexcept
+    static constexpr std::size_t count_fields() noexcept
     {
-        return count(size_t_i_c<0>{}, size_t_i_c<EST_MAX_COUNT()>{}, 1L);
+        return count(size_t_i_c<0>{}, size_t_i_c<EST_MAX_COUNT()>{});
     }
     enum { result = count_fields() };
 };
+
 template<class T>
 constexpr std::size_t fields_count()
 {
     using flds = count_type_fields<T>;
-    return flds::
-    #ifdef TEST_HOW
-            count_fields();
-    #else
-            result;
-    #endif
+    return flds::result;
 }
