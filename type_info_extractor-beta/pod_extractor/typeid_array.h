@@ -1,8 +1,7 @@
 #pragma once
 
 #include <type_traits>
-#include "mp.h"
-#include "build_type.h"
+
 struct meta_info
 {
     std::size_t nth{};
@@ -34,14 +33,8 @@ struct typeid_array
 	static constexpr std::size_t size() noexcept { return N; }
     constexpr std::size_t addInfo(const meta_info & info) noexcept
 	{
-            type_meta_info[index] = info;
-            type_ids[index] = info.type_index;
-        return
-            index = index + 1;
+        type_meta_info[index] = info;
+        type_ids[index] = info.type_index;
+        return ++index;
 	}
-    constexpr std::size_t addInfo(const std::size_t type_id) const
-        noexcept
-    {
-        return type_ids[index] = type_id;
-    }
 };
